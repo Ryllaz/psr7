@@ -114,7 +114,13 @@ class UploadedFile implements UploadedFileInterface
             return $this->stream;
         }
 
-        $resource = \fopen($this->file, 'r');
+        try {
+            $resource = \fopen($this->file, 'r');
+        } catch (\RuntimeException $e) {
+            throw $e; // getStream is allowed to throw Runetime Exceptions, but nothing else.
+        } catch (\Throwable $e) {
+            throw new \RuntimeException('Cannot bind a stream to the provided file path')
+        }
 
         return Stream::create($resource);
     }
@@ -136,7 +142,12 @@ class UploadedFile implements UploadedFileInterface
             }
 
             // Copy the contents of a stream into another stream until end-of-file.
-            $dest = Stream::create(\fopen($targetPath, 'w'));
+            try {
+                $destResource = \fopen($targetPath, 'w');
+            } catch (\Throwable $e) {
+                throw new \InvalidArgumentException('Invalid path provided for move operation; could not open a writable stream at the given location');
+            }
+            $dest = Stream::create($destResource);
             while (!$stream->eof()) {
                 if (!$dest->write($stream->read(1048576))) {
                     break;

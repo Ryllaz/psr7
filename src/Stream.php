@@ -61,6 +61,7 @@ class Stream implements StreamInterface
      * @param string|resource|StreamInterface $body
      *
      * @throws \InvalidArgumentException
+     * @throws \ValueError
      */
     public static function create($body = ''): StreamInterface
     {

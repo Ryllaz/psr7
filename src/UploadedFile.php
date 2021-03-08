@@ -119,7 +119,7 @@ class UploadedFile implements UploadedFileInterface
         } catch (\RuntimeException $e) {
             throw $e; // getStream is allowed to throw Runetime Exceptions, but nothing else.
         } catch (\Throwable $e) {
-            throw new \RuntimeException('Cannot bind a stream to the provided file path')
+            throw new \RuntimeException('Cannot bind a stream to the provided file path');
         }
 
         return Stream::create($resource);

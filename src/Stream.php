@@ -102,7 +102,7 @@ class Stream implements StreamInterface
             throw new \RuntimeException('The file ' . $filename . ' cannot be opened.');
         }
         if (false === $resource) {
-            if ('' === $mode || false === \in_array($mode[0], ['r', 'w', 'a', 'x', 'c'])) {
+            if ('' === $mode || false === \in_array($mode[0], ['r', 'w', 'a', 'x', 'c'], true)) {
                 throw new \InvalidArgumentException('The mode ' . $mode . ' is invalid.');
             }
 

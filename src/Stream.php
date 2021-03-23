@@ -90,9 +90,9 @@ class Stream implements StreamInterface
     }
 
     /**
-     * Creates a new PSR-7 stream from path
+     * Creates a new PSR-7 stream from path.
      *
-     * @internal Implements Psr\Http\Message\StreamFactoryInterface::createStreamFromFile for internal use, library users should default to the actual Factory object.
+     * @internal Implements Psr\Http\Message\StreamFactoryInterface::createStreamFromFile for internal use, library users should default to the actual Factory object
      */
     public static function createFromFile(string $filename, string $mode = 'r'): StreamInterface
     {
@@ -109,7 +109,7 @@ class Stream implements StreamInterface
             throw new \RuntimeException('The file ' . $filename . ' cannot be opened.');
         }
 
-        return Stream::create($resource);
+        return self::create($resource);
     }
 
     /**

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## Unreleased
+
+### Fixed
+
+- `Psr17Factory::createStreamFromFile`, `UploadedFile::moveTo`, and
+  `UploadedFile::getStream` no longer throw `ValueError` in PHP 8.
+
 ## 1.4.0
 
 ### Removed

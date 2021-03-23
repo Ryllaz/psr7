@@ -90,6 +90,29 @@ class Stream implements StreamInterface
     }
 
     /**
+     * Creates a new PSR-7 stream from path
+     *
+     * @internal Implements Psr\Http\Message\StreamFactoryInterface::createStreamFromFile for internal use, library users should default to the actual Factory object.
+     */
+    public static function createFromFile(string $filename, string $mode = 'r'): StreamInterface
+    {
+        try {
+            $resource = @\fopen($filename, $mode);
+        } catch (\Throwable $e) {
+            throw new \RuntimeException('The file ' . $filename . ' cannot be opened.');
+        }
+        if (false === $resource) {
+            if ('' === $mode || false === \in_array($mode[0], ['r', 'w', 'a', 'x', 'c'])) {
+                throw new \InvalidArgumentException('The mode ' . $mode . ' is invalid.');
+            }
+
+            throw new \RuntimeException('The file ' . $filename . ' cannot be opened.');
+        }
+
+        return Stream::create($resource);
+    }
+
+    /**
      * Closes the stream when the destructed.
      */
     public function __destruct()

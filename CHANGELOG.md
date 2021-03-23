@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## Unreleased
+## 1.4.1
 
 ### Fixed
 
@@ -119,4 +119,3 @@ The `final` keyword was replaced by `@final` annotation.
 ## 0.2.3
 
 No changelog before this release
-
